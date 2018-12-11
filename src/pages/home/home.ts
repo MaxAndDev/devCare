@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { HttprequestProvider } from '../../providers/httprequest/httprequest';
+import { TokenStorageProvider } from '../../providers/token-storage/token-storage';
+import { SigninPage } from '../signin/signin';
 
 @Component({
   selector: 'page-home',
@@ -8,22 +9,22 @@ import { HttprequestProvider } from '../../providers/httprequest/httprequest';
 })
 export class HomePage {
 
-  email:string;
-  password:string;
-  token:string;
+  email: string;
+  password: string;
 
-  constructor(public navCtrl: NavController, private httpReq: HttprequestProvider) {
+
+  constructor(public navCtrl: NavController, private tokenStorage: TokenStorageProvider) {
 
   }
 
-  onLogin(){
+  onLogin() {
     console.log("Login", this.email, this.password);
-    this.httpReq.postUserLogin(this.email, this.password);
+    this.tokenStorage.getToken(this.email, this.password);
   }
 
-  onSignin(){
+  onSignin() {
     console.log("Signin", this.email, this.password);
-
+    this.navCtrl.push(SigninPage);
   }
 
 }

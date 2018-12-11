@@ -4,15 +4,22 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { HttprequestProvider } from '../providers/httprequest/httprequest';
+import { TokenStorageProvider } from '../providers/token-storage/token-storage';
+import { InterceptorProvider } from '../providers/interceptor/interceptor';
+import { SigninPage } from '../pages/signin/signin';
+import { SigninStorageProvider } from '../providers/signin-storage/signin-storage';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    SigninPage
   ],
   imports: [
     BrowserModule,
@@ -22,14 +29,19 @@ import { HttprequestProvider } from '../providers/httprequest/httprequest';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    SigninPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     HttprequestProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttprequestProvider
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true },
+    HttprequestProvider,
+    TokenStorageProvider,
+    InterceptorProvider,
+    SigninStorageProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
