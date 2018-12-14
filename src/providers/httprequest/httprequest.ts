@@ -16,17 +16,12 @@ export class HttprequestProvider {
     console.log('Hello HttprequestProvider Provider');
   }
 
-  public postUserLogin(email, password): Observable<any> {
+  public postUserLogin(email, password) {
     console.log("Provider: ", email, password);
     return this.http.post(this.api_url + this.para_login, {
       "email": email,
       "password": password
-    }).map(response => {
-      return response;
-    }).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    }).map(response => response).catch((err) => err);
   }
 
   public postUserSignIn(email, password, company, name):Observable<any>{
@@ -36,12 +31,7 @@ export class HttprequestProvider {
       "password": password,
       "company": company,
       "name": name
-    }).map(response => {
-      return response;
-    }).catch((err) => {
-      console.log(err);
-      return err;
-    });
+    }).map(response => response).catch((err) => err)
   }
 
 }
