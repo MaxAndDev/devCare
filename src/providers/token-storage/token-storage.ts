@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttprequestProvider } from '../httprequest/httprequest';
+import { ErrorServiceProvider } from '../error-service/error-service';
 
 @Injectable()
 export class TokenStorageProvider {
 
-  constructor(public http: HttpClient, private httpRequest: HttprequestProvider) {
+  constructor(public http: HttpClient, private httpRequest: HttprequestProvider, private errorHandler: ErrorServiceProvider) {
     console.log('Hello TokenStorageProvider Provider');
 
   }
@@ -16,7 +17,7 @@ export class TokenStorageProvider {
       console.log(res.token);
       localStorage.setItem("token", res.token);
     }, (err => {
-      console.log(err);
+      this.errorHandler.errorHandlingLogin(err);
     }))
   }
 

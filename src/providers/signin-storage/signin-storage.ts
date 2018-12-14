@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttprequestProvider } from '../httprequest/httprequest';
+import { ErrorServiceProvider } from '../error-service/error-service';
 
 
 @Injectable()
 export class SigninStorageProvider {
 
-  constructor(public http: HttpClient, private httpReq: HttprequestProvider) {
+  constructor(public http: HttpClient, private httpReq: HttprequestProvider, private errorHandler: ErrorServiceProvider) {
     console.log('Hello SigninStorageProvider Provider');
   }
 
@@ -15,8 +16,7 @@ export class SigninStorageProvider {
       console.log(res);
       return res;
     }, err => {
-      console.log(err);
-      return (err);
+      this.errorHandler.errorHanlingSignIn(err);
     })
   }
 

@@ -14,6 +14,7 @@ import { TokenStorageProvider } from '../providers/token-storage/token-storage';
 import { InterceptorProvider } from '../providers/interceptor/interceptor';
 import { SigninPage } from '../pages/signin/signin';
 import { SigninStorageProvider } from '../providers/signin-storage/signin-storage';
+import { ErrorServiceProvider } from '../providers/error-service/error-service';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,13 @@ import { SigninStorageProvider } from '../providers/signin-storage/signin-storag
   providers: [
     StatusBar,
     SplashScreen,
-    HttprequestProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true },
     HttprequestProvider,
     TokenStorageProvider,
     InterceptorProvider,
-    SigninStorageProvider
+    SigninStorageProvider,
+    ErrorServiceProvider
   ]
 })
 export class AppModule { }

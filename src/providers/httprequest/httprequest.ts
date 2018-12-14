@@ -24,7 +24,7 @@ export class HttprequestProvider {
     }).map(response => response).catch((err) => err);
   }
 
-  public postUserSignIn(email, password, company, name):Observable<any>{
+  public postUserSignIn(email, password, company, name): Observable<any> {
     console.log("postUserSignIn: ", email, password, company, name);
     return this.http.post(this.api_url + this.para_singin, {
       "email": email,
